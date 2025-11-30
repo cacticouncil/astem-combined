@@ -479,28 +479,6 @@ const Filebar: React.FC<FilebarProps> = ({
 						return;
 					}
 					console.log(e.currentTarget.files);
-					if (e.currentTarget.files) {
-						setImageFiles(e.currentTarget.files);
-					}
-					//end of code snippet
-					
-					const files = Array.from(e.currentTarget.files || []);
-					// keep only images (file.type may be empty for some files from folders — fallback to extension)
-					const imageFiles = files.filter(f =>
-						(f.type && f.type.startsWith('image/')) ||
-						/\.(jpe?g|png|gif|tiff|bmp|webp|svg)$/i.test(f.name)
-					);
-
-					if (imageFiles.length) {
-						// convert back to a FileList using DataTransfer
-						const dt = new DataTransfer();
-						imageFiles.forEach(f => dt.items.add(f));
-						setImageFiles(dt.files);
-					} else {
-						// clear / no images selected — pass empty FileList
-						const dt = new DataTransfer();
-						setImageFiles(dt.files);
-					}
 					console.log("Files selected:", e.currentTarget.files);
 					handleFilesSelected(e.currentTarget.files);
 					e.currentTarget.value = "";
